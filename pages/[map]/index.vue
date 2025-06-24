@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import {useMainStore} from '~/stores/main'
 
+definePageMeta({
+    layout: false,
+})
+
+
 const {allowedMap} = useRouteParam()
 const store = useMainStore()
 store.regionName = ''
