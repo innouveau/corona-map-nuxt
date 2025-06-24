@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import type {TimelineProps} from '~/types'
+import type {Timeline, RegionData} from '~/types'
 
-defineProps<TimelineProps>()
-const store = useMainStore()
-const regionData = computed(() => store.regionData)
+interface Props {
+    timeline: Timeline,
+    regionData: RegionData
+}
+
+const props = defineProps<Props>()
 
 
 
@@ -13,7 +16,7 @@ const regionData = computed(() => store.regionData)
     <div class="Graph">
         <MapToolsGraphSlider :timeline="timeline" />
         <MapToolsGraphBar
-            v-for="(value, index) in regionData.numbers"
+            v-for="(value, index) in props.regionData.numbers"
             :key="index"
             :value="value" />
     </div>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Region } from '~/classes'
 import type { DrawSettings, MapProps } from '~/types'
 import { useMainStore } from '~/stores/main'
 import {getRegionForPoint} from '~/utils/canvas'
@@ -24,21 +25,25 @@ const clearCanvas = () => {
     // console.log("clear");
 }
 
+// const selectRegion = (region: Region) => {
+//     router.push({
+//         params: {
+//             region: region.title.toLowerCase(),
+//         },
+//     })
+// }
+
 const addClickEvents = (canvas: HTMLCanvasElement) => {
-    canvas.addEventListener(
-        'click',
-        (event: MouseEvent) => {
-            const region = getRegion(canvas, event)
-            if (region) {
-                router.push({
-                    params: {
-                        region: region.title.toLowerCase(),
-                    },
-                })
-            }
-        },
-        false
-    )
+    // canvas.addEventListener(
+    //     'click',
+    //     (event: MouseEvent) => {
+    //         const region = getRegion(canvas, event)
+    //         if (region) {
+    //             selectRegion(region)
+    //         }
+    //     },
+    //     false
+    // )
 }
 
 const getRegion = (canvas: HTMLCanvasElement, event: MouseEvent) => {
@@ -76,6 +81,8 @@ const drawMap = (canvas: HTMLCanvasElement) => {
             // canvas,
         }
 
+        console.log("draw");
+
         draw(
             ctx,
             props.map,
@@ -84,8 +91,6 @@ const drawMap = (canvas: HTMLCanvasElement) => {
             store.timeline,
             settings,
             'regular',
-            // this.view,
-            // this.mapType
         )
     }
 }
@@ -100,12 +105,12 @@ const init = async () => {
     }
 }
 
-watch(
-    () => store.timeline?.offset,
-    () => {
-        drawMap(el.value as HTMLCanvasElement)
-    }
-)
+// watch(
+//     () => store.timeline?.offset,
+//     () => {
+//         drawMap(el.value as HTMLCanvasElement)
+//     }
+// )
 
 onMounted(init)
 </script>
