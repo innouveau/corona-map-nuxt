@@ -1,14 +1,40 @@
 <script setup lang="ts">
 const store = useMainStore()
+const router = useRouter()
+const search  = ref('')
+
+const items = computed(() => {
+    return store.map ? store.map.regions.map(region => region.title) : []
+})
+
+const atUpdate = (regionTitle: string) => {
+    router.push({
+        params: {
+            region: regionTitle.toLowerCase(),
+        },
+    })
+}
+
+watch(
+    () => store.regionName,
+    () => {
+        search.value = ''
+    }
+)
 
 </script>
 
 <template>
     <div class="Search">
-        <input v-if="!store.hoveredRegion"
-                        type="text"
+        <UInputMenu
+            v-if="!store.hoveredRegion"
+            v-model="search"
+            :items="items"
+            @update:modelValue="atUpdate"
+            variant="none"
             placeholder="Zoeken..."
-        >
+        />
+
         <div v-if="store.hoveredRegion" class="Search__hovered">
             {{ store.hoveredRegion?.title }}
         </div>

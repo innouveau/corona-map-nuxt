@@ -4,6 +4,11 @@ export default defineAppConfig({
             primary: 'blue',
             secondary: 'black',
         },
+        inputMenu: {
+            slots: {
+                root: 'relative inline-flex items-center w-full',
+            }
+        },
         slider: {
             slots: {
                 root: 'relative flex items-center select-none touch-none',
