@@ -20,7 +20,7 @@ interface MainState {
     mapName: string
     regionName: string
     signalingSystem: SignalingSystem
-    hoveredRegion: MapRegion | null,
+    hoveredRegion: Region | null,
     data: {
         [key: string]: {
             map: Map | null
