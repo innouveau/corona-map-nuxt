@@ -20,6 +20,7 @@ interface MainState {
     mapName: string
     regionName: string
     signalingSystem: SignalingSystem
+    hoveredRegion: MapRegion | null,
     data: {
         [key: string]: {
             map: Map | null
@@ -45,6 +46,7 @@ export const useMainStore = defineStore('main', {
             mapName: '',
             regionName: '',
             signalingSystem: signalingSystems.find(s => s.id === 1),
+            hoveredRegion: null,
             data: {},
         } as MainStateWithGetters
     },

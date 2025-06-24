@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Region } from '~/classes'
 import type { DrawSettings, MapProps } from '~/types'
 import { useMainStore } from '~/stores/main'
 import {getRegionForPoint} from '~/utils/canvas'
@@ -33,13 +32,26 @@ const selectRegion = (region: Region) => {
     })
 }
 
-const addClickEvents = (canvas: HTMLCanvasElement) => {
+const addEvents = (canvas: HTMLCanvasElement) => {
     canvas.addEventListener(
         'click',
         (event: MouseEvent) => {
             const region = getRegion(canvas, event)
             if (region) {
                 selectRegion(region)
+            }
+        },
+        false
+    )
+
+    canvas.addEventListener(
+        'mousemove',
+        (event: MouseEvent) => {
+            const region = getRegion(canvas, event)
+            if (region) {
+                store.hoveredRegion = region
+            } else {
+                store.hoveredRegion = null
             }
         },
         false
@@ -81,8 +93,6 @@ const drawMap = (canvas: HTMLCanvasElement) => {
             // canvas,
         }
 
-        console.log("draw");
-
         draw(
             ctx,
             props.map,
@@ -98,7 +108,7 @@ const drawMap = (canvas: HTMLCanvasElement) => {
 const init = async () => {
     if (el.value) {
         measure(el.value)
-        addClickEvents(el.value)
+        addEvents(el.value)
         setTimeout(() => {
             drawMap(el.value as HTMLCanvasElement)
         }, 1000)
