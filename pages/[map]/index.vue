@@ -1,24 +1,17 @@
 <script setup lang="ts">
-import {useMainStore} from '~/stores/main'
-
 definePageMeta({
     layout: false,
 })
 
 
 const {allowedMap} = useRouteParam()
-const store = useMainStore()
-store.regionName = ''
 </script>
 
-<template v-if="allowedMap">
-    <section id="map">
-        <Map />
-    </section>
-
-    <!--            <section id="region-details">-->
-    <!--                <NuxtPage />-->
-    <!--            </section>-->
+<template>
+    <NuxtLayout
+        v-if="allowedMap"
+        name="map"
+    />
 </template>
 
 <style lang="scss" scoped>
