@@ -3,7 +3,6 @@ definePageMeta({
     layout: false,
 })
 
-
 const {allowedMap} = useRouteParam()
 </script>
 
@@ -11,18 +10,7 @@ const {allowedMap} = useRouteParam()
     <NuxtLayout
         v-if="allowedMap"
         name="map"
-    />
+    >
+        <NuxtPage />
+    </NuxtLayout>
 </template>
-
-<style lang="scss" scoped>
-#map {
-    width: 50%;
-    height: 100%;
-}
-
-#region-details {
-    width: 50%;
-    height: 100%;
-    overflow-y: auto;
-}
-</style>

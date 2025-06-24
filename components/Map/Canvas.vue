@@ -25,25 +25,25 @@ const clearCanvas = () => {
     // console.log("clear");
 }
 
-// const selectRegion = (region: Region) => {
-//     router.push({
-//         params: {
-//             region: region.title.toLowerCase(),
-//         },
-//     })
-// }
+const selectRegion = (region: Region) => {
+    router.push({
+        params: {
+            region: region.title.toLowerCase(),
+        },
+    })
+}
 
 const addClickEvents = (canvas: HTMLCanvasElement) => {
-    // canvas.addEventListener(
-    //     'click',
-    //     (event: MouseEvent) => {
-    //         const region = getRegion(canvas, event)
-    //         if (region) {
-    //             selectRegion(region)
-    //         }
-    //     },
-    //     false
-    // )
+    canvas.addEventListener(
+        'click',
+        (event: MouseEvent) => {
+            const region = getRegion(canvas, event)
+            if (region) {
+                selectRegion(region)
+            }
+        },
+        false
+    )
 }
 
 const getRegion = (canvas: HTMLCanvasElement, event: MouseEvent) => {
