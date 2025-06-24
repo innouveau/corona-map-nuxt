@@ -115,12 +115,12 @@ const init = async () => {
     }
 }
 
-// watch(
-//     () => store.timeline?.offset,
-//     () => {
-//         drawMap(el.value as HTMLCanvasElement)
-//     }
-// )
+watch(
+    () => store.timeline?.offset,
+    () => {
+        drawMap(el.value as HTMLCanvasElement)
+    }
+)
 
 onMounted(init)
 </script>
