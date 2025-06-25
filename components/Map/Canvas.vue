@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Region } from '~/classes'
 import type { DrawSettings, MapProps } from '~/types'
 import { useMainStore } from '~/stores/main'
 import {getRegionForPoint} from '~/utils/canvas'
@@ -26,6 +27,7 @@ const clearCanvas = () => {
 
 const selectRegion = (region: Region) => {
     router.push({
+        name: 'map-region',
         params: {
             region: region.title.toLowerCase(),
         },
