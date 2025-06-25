@@ -2,7 +2,7 @@
 import type {TimelineProps} from '~/types'
 import type {CalendarDate} from '@internationalized/date'
 import {DateFormatter} from '@internationalized/date'
-import {getOffsetFromDates} from '~/utils/data'
+import {getFormattedDate, getOffsetFromDates} from '~/utils/data'
 
 const props = defineProps<TimelineProps>()
 const store = useMainStore()
@@ -12,12 +12,8 @@ const maxDate = dateToCalendarDate(props.timeline.start, props.timeline.length -
 const start = dateToCalendarDate(props.timeline.start, props.timeline.offset)
 const v = ref(start)
 
-const df = new DateFormatter('nl-NL', {
-    dateStyle: 'medium'
-})
-
 const label = computed(() => {
-    return df.format(v.value.toDate())
+    return getFormattedDate(v.value)
 })
 
 const atUpdate = (d: CalendarDate) => {

@@ -9,7 +9,7 @@ const getDataObject = () => {
         map: null,
         data: null,
         timeline: {
-            start: null,
+            start: new Date(),
             length: 0,
             offset: 0
         }
@@ -38,6 +38,7 @@ interface MainStateWithGetters extends MainState {
     regionData: RegionData | null
     timeline: Timeline | null
     loaded: boolean
+    totalNumber: number
 }
 
 export const useMainStore = defineStore('main', {
@@ -105,6 +106,17 @@ export const useMainStore = defineStore('main', {
             const entry = state.data[state.mapName]
             return !!(entry && entry.map)
         },
+        totalNumber(state: MainState): number {
+            let total = 0;
+            const stateG = state as MainStateWithGetters
+            if (stateG.mapData && stateG.timeline) {
+                for (const region of stateG.mapData) {
+                    total += region.numbers[stateG.timeline.offset] || 0;
+                }
+
+            }
+            return total
+        }
     },
     actions: {
         addMap(key: string, regions: Region[]) {

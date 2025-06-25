@@ -1,5 +1,5 @@
 import type {CsvData, MapData, MapSource, RegionData, Timeline} from '~/types'
-import { CalendarDate } from '@internationalized/date'
+import {CalendarDate, DateFormatter} from '@internationalized/date'
 
 const getDatesFromRow = (keys: string, source: MapSource) => {
     const dates = []
@@ -74,4 +74,26 @@ export const dateToCalendarDate = (date: Date, offset: number): CalendarDate => 
 
 export const getOffsetFromDates = (date1: CalendarDate, date2: CalendarDate): number => {
     return date1.compare(date2)
+}
+
+export const getFormattedDate = (cd: CalendarDate): string => {
+    const df = new DateFormatter('nl-NL', {
+        dateStyle: 'medium'
+    })
+    return df.format(cd.toDate())
+}
+
+
+export const getFormattedDateFromOffset = (date: Date, offset: number): string => {
+    let cd
+    const y = date.getFullYear()
+    const m = date.getMonth() + 1
+    const d = date.getDate()
+    const start = new CalendarDate(y, m, d)
+    if (offset) {
+        cd = start.add({ days: offset })
+    } else {
+        cd = start
+    }
+    return getFormattedDate(cd)
 }

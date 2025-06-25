@@ -1,5 +1,5 @@
 export interface Timeline {
-    start: Date | null,
+    start: Date,
     length: number,
     offset: number
 }

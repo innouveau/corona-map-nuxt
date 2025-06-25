@@ -24,6 +24,7 @@
 body {
     --bg: #f5eedc;
     --serif: 'Merriweather';
+    --border-color: #ddd;
     font-family: 'Montserrat', sans-serif;
 }
 </style>
